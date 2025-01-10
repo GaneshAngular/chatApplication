@@ -1,0 +1,18 @@
+
+<div class="container">
+     <div class="row">
+      <div class="col-md-4 mx-auto">
+        <h1 class="text-center">Verify</h1>
+         <form action="" >
+          <div class="forms-group">
+            <!-- <label for="otp" class="form-label" >OTP</label> -->
+            <input type="text" class="form-control" maxlength="6" id="otp" name="otp" [(ngModel)]="otp" placeholder="Enter otp">
+          </div>
+          <div class="forms-group my-3 ">
+            <button type="button" class="btn btn-success w-100 btn-sm" (click)="verify()" >Verify</button>
+          </div>
+         </form>
+      </div>
+      <a  class="link-primary" routerLink="/login" (click)="backTologin()">Back to Login</a>
+     </div>
+</div>
