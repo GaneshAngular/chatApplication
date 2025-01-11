@@ -1,6 +1,8 @@
 
 <div class="container">
      <div class="row">
+      <P *ngIf="!isOtpExpired">OTP EXPIRES IN {{expiryTime}} seconds</P>
+      <p *ngIf="isOtpExpired" class="text-danger">OTP EXPIRED,try Again </p>
       <div class="col-md-4 mx-auto">
         <h1 class="text-center">Verify</h1>
          <form action="" >
@@ -9,7 +11,7 @@
             <input type="text" class="form-control" maxlength="6" id="otp" name="otp" [(ngModel)]="otp" placeholder="Enter otp">
           </div>
           <div class="forms-group my-3 ">
-            <button type="button" class="btn btn-success w-100 btn-sm" (click)="verify()" >Verify</button>
+            <button type="button" class="btn btn-success w-100 btn-sm" [disabled]="!isOtpExpired" (click)="verify()" >Verify</button>
           </div>
          </form>
       </div>

@@ -3,7 +3,8 @@ const userModel = require("../models/user.model")
 const { generateOtp, sendOtpViaEmail, hashOTP } = require("../services/otp-service.service")
 const { Session } = require("inspector/promises")
 const OTP = require("../models/otp.model")
-const { generateToken } = require("../services/jwt.service")
+const { generateToken, verifyToken } = require("../services/jwt.service")
+const { log } = require("console")
 
 
 const login = async (req, res) => {
@@ -13,16 +14,24 @@ const login = async (req, res) => {
     if (!user) {
       return res.status(401).json({ message: 'User not found' })
     }
-    const otpData = generateOtp()
+    const oldOtp=await OTP.findOne({email})
+      console.log(oldOtp?.otp);
+      
+    const otpData =oldOtp?.otp|| generateOtp()
+    console.log(otpData);
+    
     const isSent = sendOtpViaEmail(email, otpData)
 
 
-    if (isSent) {
+    if (!oldOtp && isSent ) {
     
       await OTP.create({ otp: otpData, email: user.email })
       return res.status(200).json({ message: 'OTP sent successfully', email: user.email })
-    } else {
+    } else if(oldOtp?.otp) {
+      return res.status(500).json({ message: 'OTP already sent expires in 30 seconds' })
+    }else{
       return res.status(500).json({ message: 'Error sending OTP' })
+      
     }
 
   } catch (error) {
@@ -42,6 +51,7 @@ const verifyOtp = async (req, res) => {
 
   if (dbOtp.otp == otp) {
        const token=generateToken({email})
+      
     return res.status(200).json({ message: 'OTP verified successfully',token:token })
   } else {
     return res.status(401).json({ message: 'Invalid OTP' })
@@ -52,7 +62,12 @@ const signup = async (req, res) => {
   const { name, email, mobile } = req.body
 
   try {
-    const user = await userModel.findOne({ email, mobile })
+    const user = await userModel.findOne({
+      $or: [
+        { email: { $exists: true, $ne: null } },
+        { mobile: { $exists: true, $ne: null } }
+      ]
+    })
     if (user) {
       return res.status(409).json({ message: 'Account already exists' })
     }

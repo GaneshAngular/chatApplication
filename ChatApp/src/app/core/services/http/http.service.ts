@@ -10,7 +10,7 @@ export class HttpService {
 
   constructor(private http:HttpClient) { }
 
-   get(url:string,params:Params){
+   get(url:string,params?:Params){
      return this.http.get(SERVER_URL+url,{params})
    }
    post(url:string,data:any){

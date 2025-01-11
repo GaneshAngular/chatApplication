@@ -4,6 +4,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const authRouter = require('./src/routes/auth.route')
 const session = require('express-session')
+const userRouter = require('./src/routes/user.route')
 
 const app = express()
 app.use(session({
@@ -21,6 +22,7 @@ mongoose.connect(process.env.DATABASE_URL).then(() => {
 
 app.use(express.json())
 app.use('/auth', authRouter)
+app.use('/users',userRouter)
 
 
 app.listen(process.env.PORT, () => {

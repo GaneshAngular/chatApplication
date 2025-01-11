@@ -27,9 +27,10 @@ export class LoginComponent implements OnInit {
   })
 
 onLogin(){
+  this.isOtp=!this.isOtp
+
     if(this.loginForm.valid){
       this.auth.login(this.loginForm.value).subscribe((res:any)=>{
-        this.isOtp=!this.isOtp
         this.email=res.email
         alert(res.message)
       },(err:any)=>{
