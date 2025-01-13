@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
 }
 
 body {
@@ -95,7 +95,7 @@ body {
 }
 
 .nav-icons li {
-  backgroud-color:pink;
+  /* backgroud-color:pink; */
   list-style: none;
   display: flex;
   cursor: pointer;
@@ -308,7 +308,7 @@ img {
 .right-container .header .nav-icons {
   position: relative;
   margin-right:0px;
-/*   padding: 5px; */
+  padding: 5px;
 }
 
 .right-container .header .nav-icons i {

@@ -100,35 +100,55 @@ const sendMessage = async (req, res) => {
 }
 
 const getMessages = async (req, res) => {
-    const token = req.headers['token']
-    const email = verifyToken(token)
+  let token = req.headers?.authorization;
+  token=token.split(" ")[1]
+    const email = verifyToken(token).email
+    let chats=[]
    try{ const user= await userModel.findOne({email:email})
     const userId=user._id
-    const reciever=req.quary.reciever
- 
-    const chats = await chatModel.find({
+    const reciever=req.query.id;
+console.log(reciever);
+
+     chats = await chatModel.find({
         $or: [
           { sender: userId, receiver: reciever },
           { sender: reciever, receiver: userId }
         ]
       }).sort({ createdAt: 1 });
     }catch(error){
+      console.log(error);
+      
      return res.status(500).json({ message: 'Error fetching messages' }); 
      }
       return res.json(chats)
   
 }
 
+const getUsersById=async(req,res)=>{
+         try {
+              const id=req.query.id
+              const user=await userModel.findById(id)
+              if(!user){
+                 return res.status(404).json({message:"user not found"})
+              }
+              return res.json(user)
+         } catch (error) {
+             console.log(error);
+             return res.status(500).json({message:"server error"})
+         }
+}
+
 const getProfile=async(req,res)=>{
-     const token = req.headers['token']
-    const email = verifyToken(token)
+  let token = req.headers?.authorization;
+  token=token.split(" ")[1]
+    const email = verifyToken(token).email
     try {
         
-        const user=await userModel.find({email:email})
+        const user=await userModel.findOne({email:email})
+        return res.json(user)
     } catch (error) {
         return  res.status(500).json({message:"somethng error "})
     }
-    return res.json({user:user})
 }
 
 module.exports = {
@@ -136,5 +156,6 @@ module.exports = {
     getContacts,
     sendMessage,
     getMessages,
-    getProfile
+    getProfile,
+    getUsersById
 }

@@ -60,7 +60,8 @@ const verifyOtp = async (req, res) => {
 
 const signup = async (req, res) => {
   const { name, email, mobile } = req.body
-
+  console.log(email,mobile);
+  
   try {
     const user = await userModel.findOne({
       $or: [
@@ -69,6 +70,8 @@ const signup = async (req, res) => {
       ]
     })
     if (user) {
+      console.log(user);
+      
       return res.status(409).json({ message: 'Account already exists' })
     }
 

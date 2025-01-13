@@ -7,8 +7,10 @@ const VERIFY_OTP='/auth/login/verify'
 
 const GET_USERS='/users/'
 const GET_CONTACTS='/users/contacts/'
-const SEND_MESSAGE='/message/'
-const GET_MESSAGE='/message/'
+const SEND_MESSAGE='/users/message/'
+const GET_MESSAGE='/users/message/'
+const GET_PROFILE='/users/self'
+const GET_USERS_BY_ID='/users/id'
 
 
 export
@@ -21,4 +23,6 @@ export
   GET_CONTACTS,
   SEND_MESSAGE,
   GET_MESSAGE,
+  GET_PROFILE,
+  GET_USERS_BY_ID
 }
