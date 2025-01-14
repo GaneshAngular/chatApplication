@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http/http.service';
 import { Params } from '@angular/router';
-import { GET_CONTACTS, GET_MESSAGE, GET_PROFILE, GET_USERS, GET_USERS_BY_ID, SEND_MESSAGE } from '../../constants/Urls';
+import { GET_CONTACTS, GET_MESSAGE, GET_PROFILE, GET_USERS, GET_USERS_BY_ID, SEND_MESSAGE, UPDATE_PROFILE_DETAIL, UPDATE_PROFILE_IMAGE } from '../../constants/Urls';
 import { HttpParams } from '@angular/common/http';
 
 @Injectable({
@@ -33,5 +33,13 @@ export class UsersService {
 
    getProfile(){
      return this.httpServie.get(GET_PROFILE)
+   }
+
+   updateProfileImage(data:any){
+    return this.httpServie.put(UPDATE_PROFILE_IMAGE,data)
+   }
+
+   updateProfileDetail(data:any){
+       return this.httpServie.put(UPDATE_PROFILE_DETAIL,data)
    }
 }

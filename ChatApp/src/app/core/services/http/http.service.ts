@@ -16,7 +16,7 @@ export class HttpService {
    post(url:string,data:any){
      return this.http.post(SERVER_URL+url,data)
    }
-   put(url:string,data:any,params:Params){
+   put(url:string,data:any,params?:Params){
         return this.http.put(SERVER_URL+url,data,params)
    }
 

@@ -50,18 +50,18 @@ countdownInterval: any;
   }
 
   otpTimeOut(){
-    this.isOtpExpired = false;
+
     // Start the countdown timer using arrow function to maintain context of 'this'
     this.countdownInterval = setInterval(() => {
       this.expiryTime--;  // Decrease the time by 1 second
 
       // If the countdown reaches 0, stop the timer and show expired message
       if (this.expiryTime <= 0) {
-        clearInterval(this.countdownInterval);
         this.changeOtp.emit(!this.isOtp)
-        console.log("timer expired");
-         // Stop the countdown when time reaches 0
-        this.isOtpExpired = true;
+       
+        // Stop the countdown when time reaches 0
+
+        clearInterval(this.countdownInterval);
       }
     }, 1000);  // 1000
 

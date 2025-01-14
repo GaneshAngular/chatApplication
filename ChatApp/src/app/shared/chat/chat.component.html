@@ -2,10 +2,10 @@
  <div class="header">
   <div class="img-text">
     <div class="user-img">
-    <img class="dp" src="profile.webp" alt="">
+    <img class="dp" src="{{reciever?.profile}}" alt="">
   </div>
   <div>
-    <h6>{{reciever?.name}} <span>Online</span></h6>
+    <h6>{{reciever?.name}} </h6>
   </div>
   </div>
   <div class="nav-icons">
@@ -15,7 +15,7 @@
 </div>
 
 <!--chat-container -->
-<div class="chat-container">
+<div class="chat-container" #chatContainer >
   <div class="message-box {{(message?.sender==reciever?._id)?'friend-message':'my-message'}}" *ngFor="let message of messages">
 
     <p>{{message?.message}}<br><span>{{message?.createdAt |date :'hh:mm a'}}</span></p>
@@ -47,6 +47,7 @@
 <div class="message-box friend-message">
     <p>Awesome! I'll start a video chat with you in a few.<br><span>07:49</span></p>
   </div> -->
+  <div #scrollToEnd></div>
 </div>
 
 <!--input-bottom -->

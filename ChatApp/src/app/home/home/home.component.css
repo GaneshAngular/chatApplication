@@ -289,6 +289,7 @@ img {
 }
 
 .right-container .header .img-text {
+  width: 200px;
   position: relative;
   display: flex;
   cursor: pointer;
@@ -296,6 +297,7 @@ img {
 
 .right-container .header .img-text h4 {
   font-weight: 300;
+  color: #06e744;
   line-height: 1.2em;
   margin-left: 15px;
 }
@@ -438,3 +440,85 @@ img {
    width: 100%;
    height: 100%;
  }
+
+
+ .container {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  height: 450px;
+  width: 300px;
+  box-shadow: 0 10px 20px black;
+  background-color: white;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  font-family: 'Abel', sans-serif;
+}
+
+.image {
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  background-size: cover;
+  border-radius: 50%;
+  border: 8px solid white;
+  position: relative;
+  top: 200px;
+  margin-left: 170px;
+  box-shadow: 0 2px 15px rgb(58, 54, 54);
+  transform: rotate(-25deg)
+}
+
+
+.shape {
+  height: 250px;
+  width: 400px;
+  background-color:  rgb(40, 163, 194);;
+  margin-left: -20px;
+  position: relative;
+  top: -80px;
+  box-shadow: 0 2px 15px black;
+  transform: rotate(25deg);
+}
+
+h3 {
+  margin-bottom: 10px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.title {
+  color: rgb(105, 100, 109);
+}
+
+p {
+  padding-left: 30px;
+  padding-right: 30px;
+  color: rgb(105, 100, 109);
+}
+
+.icons {
+  margin-top: 15px;
+}
+
+.icons i {
+  margin-left: 10px;
+  font-size: 20px;
+  transition: 0.3s;
+  color: rgb(40, 163, 194);
+  ;
+}
+
+.icons i:hover {
+  transform: scale(1.1);
+  color: rgb(18, 192, 235);
+}
+
+.edit-image{
+  position: absolute;
+  bottom: -5% ;
+  right:10%;
+
+}

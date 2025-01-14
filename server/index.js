@@ -21,7 +21,7 @@ const io=socketIo(server,{
       allowedHeaders: ["Content-Type"], // Allow custom headers
     },
   })
-app.io=io
+
 
 
 mongoose.connect(process.env.DATABASE_URL).then(() => {
@@ -30,13 +30,14 @@ mongoose.connect(process.env.DATABASE_URL).then(() => {
     console.error('Error connecting to MongoDB', err)
 })
 
+const loggedUsers={}
 io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
   
     // Handle user joining their own room based on userId
     socket.on('setUser', (userId) => {
       socket.userId = userId; // Store user ID on the socket
-      socket.join(userId); // Join the room with user ID (used for private messaging)
+      loggedUsers[userId]=socket.id // Join the room with user ID (used for private messaging)
       console.log(`User ${userId} connected with socket ID: ${socket.id}`);
     });
 
@@ -53,7 +54,7 @@ io.on('connection', (socket) => {
             })
             
               const msg = await newChat.save();
-              console.log("data saved",msg);
+            
               
         }else{
          return console.log("error in sending message");
@@ -71,8 +72,13 @@ io.on('connection', (socket) => {
             { sender: receiver, receiver: senderId }
           ]
         }).sort({ createdAt: 1 });
-              io.emit('privateMessage', chats);
-              console.log(`Message sent to ${receiver}: ${message}`);
+        const recev=loggedUsers[receiver];
+        if(recev){
+
+          io.to(recev).emit('privateMessage', chats);
+          io.to(socket.id).emit('privateMessage', chats);
+          console.log(`Message sent to ${receiver}: ${message}`);
+        }
           
       } catch (err) {
           console.error("Error saving message:", err);
@@ -85,6 +91,7 @@ io.on('connection', (socket) => {
     });
   });
 
+  app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 app.use('/auth', authRouter)
 app.use('/users',userRouter)

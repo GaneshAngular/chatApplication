@@ -12,6 +12,8 @@ const GET_MESSAGE='/users/message/'
 const GET_PROFILE='/users/self'
 const GET_USERS_BY_ID='/users/id'
 
+const UPDATE_PROFILE_IMAGE='/users/self/profile/'
+const UPDATE_PROFILE_DETAIL='/users/self/detail'
 
 export
 {
@@ -24,5 +26,7 @@ export
   SEND_MESSAGE,
   GET_MESSAGE,
   GET_PROFILE,
-  GET_USERS_BY_ID
+  GET_USERS_BY_ID,
+  UPDATE_PROFILE_IMAGE,
+  UPDATE_PROFILE_DETAIL
 }

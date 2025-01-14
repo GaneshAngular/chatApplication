@@ -303,21 +303,25 @@ img {
   object-fit: cover;
 }
 
-.right-container .header .img-text {
+.img-text {
+  width: 300px;
   position: relative;
   display: flex;
+  align-items: center;
   justify-content: flex-start;
   cursor: pointer;
 }
 
-.right-container .header .img-text h4 {
+.img-text div h6 {
   font-weight: 500;
   line-height: 1.2em;
   min-width: 100px;
   margin-left: 15px;
+
 }
 
-.right-container .header .img-text h4 span {
+ .img-text h4 span {
+
   font-size: 0.5em;
   color: #555;
 }
